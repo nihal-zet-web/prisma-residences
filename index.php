@@ -1,4 +1,11 @@
+<?php 
+	require "config.php";
 
+	$selectPropertiesQuery = "SELECT * FROM properties";
+	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
+	$selectPropertiesStmt->execute();
+	$result = $selectPropertiesStmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +52,12 @@
 		<h1>FEATURED PROPERTIES</h1>
 		<article>
 			<div>
-				<h1>This is a property</h1>
+				<h1><?php
+						foreach ($result as $row) {
+							echo htmlspecialchars($row['title']).".<BR>";
+						}
+					?>
+				</h1>
 				<figure>
   					<img src="" alt="Can't load the image.">
   					<figcaption>this is the caption of the image.</figcaption>
