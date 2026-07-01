@@ -52,16 +52,13 @@
 		<h1>FEATURED PROPERTIES</h1>
 		<article>
 			<div>
-				<h1><?php
-						foreach ($result as $row) {
-							echo htmlspecialchars($row['title']).".<BR>";
-						}
-					?>
-				</h1>
-				<figure>
-  					<img src="" alt="Can't load the image.">
-  					<figcaption>this is the caption of the image.</figcaption>
-				</figure>
+				<?php
+					foreach ($result as $row) {
+						echo `<figure><img src="" alt="Can't load the image."><figcaption>this is the caption of the image.</figcaption></figure>"`;
+						echo "<h3>".htmlspecialchars($row['title'])."</h3><BR>";
+						echo "<p>".htmlspecialchars($row['price'])." ".htmlspecialchars($row['square_meters'])."m^2"." ".htmlspecialchars($row['location']);
+					}
+				?>
 			</div>
 		</article>
 	</section>
