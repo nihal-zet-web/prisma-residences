@@ -62,7 +62,6 @@
 									<img src="" alt="Can't load the image.">
 									<figcaption>this is the caption of the image.</figcaption>
 								</figure>
-								<?=htmlspecialchars($row['id']);?>
 								<h3><?=htmlspecialchars($row['title'])?></h3>
 								<p>
 									<?=htmlspecialchars($row['price'])?>
