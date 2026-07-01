@@ -60,7 +60,7 @@
 					<h3><?=htmlspecialchars($row['title'])?></h3>
 					<p>
 						<?=htmlspecialchars($row['price'])?>
-						<?=htmlspecialchars($row['square_meters'])?>m^2
+						<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
 						<?=htmlspecialchars($row['location'])?>
 					</p>
 				<?php endforeach; ?>
