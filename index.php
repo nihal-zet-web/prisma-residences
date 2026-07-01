@@ -18,7 +18,7 @@
 	<header>Prisma Residences</header>		
 	<nav>
 		<a class="navBar-element" href="">HOME</a>
-		<a class="navBar-element" href="properties.html">PROPERTIES</a>
+		<a class="navBar-element" href="properties.php">PROPERTIES</a>
 		<a class="navBar-element" href="sell_with_us.html">SELL WITH US</a>
 		<a class="navBar-element" href="contact_us.html">CONTACT US</a>
 		<a class="navBar-element" href="about_us.html">ABOUT US</a>
