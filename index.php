@@ -72,6 +72,7 @@
 					<?php endfor; ?>
 				<?php endforeach; ?>
 			</div>
+			<a href="properties.php">View all properties avalaible</a>
 		</article>
 	</section>
 	</main>
