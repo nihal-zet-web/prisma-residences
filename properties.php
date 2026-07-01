@@ -1,3 +1,11 @@
+<?php 
+	require "config.php";
+
+	$selectPropertiesQuery = "SELECT * FROM properties";
+	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
+	$selectPropertiesStmt->execute();
+	$result = $selectPropertiesStmt->fetchAll();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,10 +28,18 @@
 		<h1>ALL PROPERTIES AVAILABLE</h1>
 		<article>
 			<div>
-				<figure>
-  					<img src="" alt="Can't load the image.">
-  					<figcaption>this is the caption of the image.</figcaption>
-				</figure>
+				<?php foreach ($result as $row): ?>
+					<figure>
+						<img src="" alt="Can't load the image.">
+						<figcaption>this is the caption of the image.</figcaption>
+					</figure>
+					<h3><?=htmlspecialchars($row['title'])?></h3>
+					<p>
+						<?=htmlspecialchars($row['price'])?>
+						<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
+						<?=htmlspecialchars($row['location'])?>
+					</p>
+				<?php endforeach; ?>
 			</div>
 		</article>
 	</section>
