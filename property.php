@@ -1,10 +1,11 @@
 <?php 
 	require "config.php";
-
-	$selectPropertiesQuery = "SELECT * FROM properties";
-	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
-	$selectPropertiesStmt->execute();
-	$result = $selectPropertiesStmt->fetchAll();
+	$id = htmlspecialchars($_GET['id']); 
+	echo $id; 
+	$selectPropertyQuery = "SELECT * FROM properties WHERE id = :id";
+	$selectPropertyStmt = $pdo->prepare($selectPropertyQuery);
+	$selectPropertyStmt->execute([":id" => $id]);
+	$result = $selectPropertyStmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,21 +27,22 @@
 	<main>
 	<section> 
 		<article class="house-story">
-			<h2>This is a property title</h2>
-  			<img src="" alt="Can't load the image.">
-            <p>Here we write the story of the house. The beautiful views it has, the experience the client can have when they buy it, etc.</p>
+			<h2><?=htmlspecialchars($result['title'])?></h2>
+			<img src="" alt="Can't load the image.">
+			<p>Here we write the story of the house. The beautiful views it has, the experience the client can have when they buy it, etc.</p>
 		</article>
 		<article class="house-details">
 			<h3>Property details</h3>
-            <ul>
-                <li>Location: </li>
-                <li>Price: </li>
-                <li>Square meters: </li>
-                <li>Number of rooms: </li>
-                <li>Bathrooms: </li>
-                <li>Property condition: </li>
-                <li>Year of construction: </li>
-            </ul>
+			<ul>
+				<li>Location: <?=htmlspecialchars($result['location'])?></li>
+				<li>Price: <?=htmlspecialchars($result['price'])?></</li>
+				<li>Square meters: <?=htmlspecialchars($result['square_meters'])?></</li>
+				<li>Number of rooms: <?=htmlspecialchars($result['number_of_rooms'])?></</li>
+				<li>Bathrooms: <?=htmlspecialchars($result['number_of_bathrooms'])?></</li>
+				<li>Property condition: <?=htmlspecialchars($result['property_condition'])?></</li>
+				<li>Year of construction: <?=htmlspecialchars($result['year_of_construction'])?></</li>
+				<li>Other details: <?=htmlspecialchars($result['other_details'])?></</li>
+			</ul>
 		</article>
 	</section>
     <section>
