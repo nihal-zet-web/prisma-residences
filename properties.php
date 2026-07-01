@@ -33,7 +33,7 @@
 						<img src="" alt="Can't load the image.">
 						<figcaption>this is the caption of the image.</figcaption>
 					</figure>
-					<h3><?=htmlspecialchars($row['title'])?></h3>
+					<h3><a href="property.php?id=<?=htmlspecialchars($row['id'])?>"><?=htmlspecialchars($row['title'])?></a></h3>
 					<p>
 						<?=htmlspecialchars($row['price'])?>
 						<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
