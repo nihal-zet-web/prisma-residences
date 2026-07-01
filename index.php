@@ -53,16 +53,24 @@
 		<article>
 			<div>
 				<?php foreach ($result as $row): ?>
-					<figure>
-						<img src="" alt="Can't load the image.">
-						<figcaption>this is the caption of the image.</figcaption>
-					</figure>
-					<h3><?=htmlspecialchars($row['title'])?></h3>
-					<p>
-						<?=htmlspecialchars($row['price'])?>
-						<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
-						<?=htmlspecialchars($row['location'])?>
-					</p>
+					<?php for ($i = 0; $i < 10; $i++): ?>
+						<?php  
+							$id = rand(1, count($result)); 
+							if ($id === $row['id']): 
+						?>
+								<figure>
+									<img src="" alt="Can't load the image.">
+									<figcaption>this is the caption of the image.</figcaption>
+								</figure>
+								<?=htmlspecialchars($row['id']);?>
+								<h3><?=htmlspecialchars($row['title'])?></h3>
+								<p>
+									<?=htmlspecialchars($row['price'])?>
+									<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
+									<?=htmlspecialchars($row['location'])?>
+								</p>
+							<?php endif; ?>
+					<?php endfor; ?>
 				<?php endforeach; ?>
 			</div>
 		</article>
