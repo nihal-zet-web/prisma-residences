@@ -1,5 +1,5 @@
 <?php 
-    require "config.php";
+    require "../config.php";
     if ($_GET) {
         $title = htmlspecialchars($_GET['title']);
         $price = htmlspecialchars($_GET['price']);
