@@ -48,9 +48,9 @@
 
                 <label for="title">Title</label>
                 <input type="text" id="title" value="title" name="title" required>
-                
-                <label for="location">Location</label>
-                <input type="text" id="location" value="location" name="location" required>
+
+                <label for="price">Price</label>
+                <input type="text" id="price" value="price" name="price" required>
                 
                 <label for="sqm">Square meters</label>
                 <input type="text" id="sqm" value="sqm" name="sqm" required>
@@ -60,12 +60,18 @@
                 
                 <label for="bathrooms">Bathrooms</label>
                 <input type="text" id="bathrooms" value="bathrooms" name="bathrooms" required>
+
+                <label for="other-details">Other Details</label>
+                <input type="text" id="other-details" value="other-details" name="other-details">
                 
                 <label for="property-condition">Property condition</label>
                 <input type="text" id="property-condition" value="property-condition" name="property-condition" required>
                 
                 <label for="year">Year of construction</label>
                 <input type="text" id="year" value="year" name="year" required>
+
+                <label for="location">Location</label>
+                <input type="text" id="location" value="location" name="location" required>
                 
                 <input type="submit" value="Submit">
             </form>
