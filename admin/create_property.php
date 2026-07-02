@@ -1,3 +1,23 @@
+<?php 
+    require "config.php";
+    if ($_GET) {
+        $title = htmlspecialchars($_GET['title']);
+        $price = htmlspecialchars($_GET['price']);
+        $squareMeters = htmlspecialchars($_GET['square_meters']);
+        $numberOfRooms = htmlspecialchars($_GET['number_of_rooms']);
+        $numberOfBathrooms = htmlspecialchars($_GET['number_of_bathrooms']);
+        $otherDetails = htmlspecialchars($_GET['other_details']);
+        $propertyCondition = htmlspecialchars($_GET['property_condition']);
+        $yearOfConstruction = htmlspecialchars($_GET['year_of_construction']);
+        $location = htmlspecialchars($_GET['location']);
+
+        $insertQuery = "INSERT INTO properties (title, price, square_meters, number_of_rooms, number_of_bathrooms, other_details, property_condition, year_of_construction, location) VALUES ($title, $price, $squareMeters, $numberOfRooms, $numberOfBathrooms, $otherDetails, $propertyCondition, $yearOfConstruction, $location)";
+        $insertStmt = $pdo->prepare($insertQuery);
+        $insertStmt->execute();
+        echo "row added correctly";
+    }
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
