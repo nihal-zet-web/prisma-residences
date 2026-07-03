@@ -1,19 +1,31 @@
 <?php 
     require "../config.php";
+    //var_dump($_GET);
     if ($_GET) {
         $title = htmlspecialchars($_GET['title']);
+        $ownerId = htmlspecialchars($_POST['owner-id']);
         $price = htmlspecialchars($_GET['price']);
-        $squareMeters = htmlspecialchars($_GET['square_meters']);
-        $numberOfRooms = htmlspecialchars($_GET['number_of_rooms']);
-        $numberOfBathrooms = htmlspecialchars($_GET['number_of_bathrooms']);
-        $otherDetails = htmlspecialchars($_GET['other_details']);
-        $propertyCondition = htmlspecialchars($_GET['property_condition']);
-        $yearOfConstruction = htmlspecialchars($_GET['year_of_construction']);
+        $squareMeters = htmlspecialchars($_GET['sqm']);
+        $numberOfRooms = htmlspecialchars($_GET['rooms']);
+        $numberOfBathrooms = htmlspecialchars($_GET['bathrooms']);
+        $otherDetails = htmlspecialchars($_GET['other-details']);
+        $propertyCondition = htmlspecialchars($_GET['property-condition']);
+        $yearOfConstruction = htmlspecialchars($_GET['year']);
         $location = htmlspecialchars($_GET['location']);
 
-        $insertQuery = "INSERT INTO properties (title, price, square_meters, number_of_rooms, number_of_bathrooms, other_details, property_condition, year_of_construction, location) VALUES ($title, $price, $squareMeters, $numberOfRooms, $numberOfBathrooms, $otherDetails, $propertyCondition, $yearOfConstruction, $location)";
+        $insertQuery = "INSERT INTO properties (owner_id, title, price, square_meters, number_of_rooms, number_of_bathrooms, other_details, property_condition, year_of_construction, location) VALUES (:ownerId, :title, :price, :squareMeters, :numberOfRooms, :numberOfBathrooms, :otherDetails, :propertyCondition, :yearOfConstruction, :location)";
         $insertStmt = $pdo->prepare($insertQuery);
-        $insertStmt->execute();
+        $insertStmt->execute(
+            [":title" => $title,
+            ":price" => $price, 
+            ":squareMeters" => $squareMeters,
+            ":numberOfRooms" => $numberOfRooms,
+            ":numberOfBathrooms" => $numberOfBathrooms,
+            ":otherDetails" => $otherDetails,
+            ":propertyCondition" => $propertyCondition,
+            ":yearOfConstruction" => $yearOfConstruction,
+            ":location" => $location]
+        );
         echo "row added correctly";
     }
 ?>
