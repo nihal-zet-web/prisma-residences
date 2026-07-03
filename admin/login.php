@@ -1,4 +1,14 @@
-
+<?php
+    require "../config.php";
+    $email = htmlspecialchars($_POST['admin-email']);
+    //cambiar por password cuando las contraseñas sean diferentes
+    $selectQuery = "SELECT id FROM owners WHERE email = :email";
+    $selectStmt = $pdo->prepare($selectQuery);
+    $selectStmt->execute([":email" => $email]);
+    $result = $selectStmt->fetch(PDO::FETCH_ASSOC);
+    $id = $result['id'];
+    echo $id;
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -21,7 +31,7 @@
                 <label for="admin-email">Email</label>
                 <input type="email" id="admin-email" value="admin-email" name="admin-email" required>
                 
-                <label for="password">Year of construction</label>
+                <label for="password">Password</label>
                 <input type="text" id="password" value="password" name="password" required>
                 
                 <input type="submit" value="Submit">
