@@ -6,6 +6,11 @@
 	$selectPropertyStmt = $pdo->prepare($selectPropertyQuery);
 	$selectPropertyStmt->execute([":id" => $id]);
 	$result = $selectPropertyStmt->fetch(PDO::FETCH_ASSOC);
+	//Show the property image
+	$selectImageQuery = "SELECT * FROM property_images WHERE id = :id";
+	$selectImageStmt = $pdo->prepare($selectImageQuery);
+	$selectImageStmt->execute([":id" => $id]);
+	$image = $selectImageStmt->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +33,7 @@
 	<section> 
 		<article class="house-story">
 			<h2><?=htmlspecialchars($result['title'])?></h2>
-			<img src="" alt="Can't load the image.">
+			<img src="<?=htmlspecialchars($image['image_url'])?>" style="height: 400; weight: 800;" alt="Can't load the image.">
 			<p>Here we write the story of the house. The beautiful views it has, the experience the client can have when they buy it, etc.</p>
 		</article>
 		<article class="house-details">
