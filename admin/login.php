@@ -1,7 +1,8 @@
 <?php
     require "../config.php";
     $email = htmlspecialchars($_POST['admin-email']);
-    //cambiar por password cuando las contraseñas sean diferentes
+    //Change Email for password when starting to connect ajax 
+    //Pass the id selecting using the admin's email
     $selectQuery = "SELECT id FROM owners WHERE email = :email";
     $selectStmt = $pdo->prepare($selectQuery);
     $selectStmt->execute([":email" => $email]);
