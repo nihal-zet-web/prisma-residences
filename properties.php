@@ -1,10 +1,15 @@
 <?php 
 	require "config.php";
-
+	//Show properties in the page
 	$selectPropertiesQuery = "SELECT * FROM properties";
 	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
 	$selectPropertiesStmt->execute();
 	$result = $selectPropertiesStmt->fetchAll();
+	//Show properties's images in the page
+	$selectImagesQuery = "SELECT * FROM property_images";
+	$selectImagesStmt = $pdo->prepare($selectImagesQuery);
+	$selectImagesStmt->execute();
+	$images = $selectImagesStmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +34,15 @@
 		<article>
 			<div>
 				<?php foreach ($result as $row): ?>
+					<?php $id = $row['id']; ?>
 					<figure>
-						<img src="" alt="Can't load the image.">
-						<figcaption>this is the caption of the image.</figcaption>
+						<?php foreach ($images as $image): ?>
+							<?php $propertyId = $image['property_id']; ?>
+							<?php if ($id === $propertyId): ?>
+								<img src="<?=htmlspecialchars($image['image_url'])?>" style="height: 100; weight: 200;" alt="Can't load the image.">
+								<figcaption>This is the figcaption</figcaption>
+							<?php endif; ?>
+						<?php endforeach; ?> 
 					</figure>
 					<h3><a href="property.php?id=<?=htmlspecialchars($row['id'])?>"><?=htmlspecialchars($row['title'])?></a></h3>
 					<p>
