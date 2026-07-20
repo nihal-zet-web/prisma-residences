@@ -1,10 +1,17 @@
 <?php 
 	require "config.php";
-
+    
 	$selectPropertiesQuery = "SELECT * FROM properties";
 	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
 	$selectPropertiesStmt->execute();
 	$result = $selectPropertiesStmt->fetchAll();
+
+	//Filter properties using the user preferences
+	$propertyType = $_GET['property-type']; 
+	$propertyLocation = $_GET['location'];
+	var_dump($propertyLocation);
+	var_dump($propertyType);
+	//$selectPropertiesQuery = ""
 ?>
 <!DOCTYPE html>
 <html lang="en">
