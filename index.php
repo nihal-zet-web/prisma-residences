@@ -4,13 +4,18 @@
 	$selectPropertiesQuery = "SELECT * FROM properties";
 	$selectPropertiesStmt = $pdo->prepare($selectPropertiesQuery);
 	$selectPropertiesStmt->execute();
-	$result = $selectPropertiesStmt->fetchAll();
+	$properties = $selectPropertiesStmt->fetchAll();
+
+	$selectImagesQuery = "SELECT * FROM property_images";
+	$selectImagesStmt = $pdo->prepare($selectImagesQuery);
+	$selectImagesStmt->execute();
+	$images = $selectImagesStmt->fetchAll();
 
 	//Filter properties using the user preferences
-	$propertyType = $_GET['property-type']; 
-	$propertyLocation = $_GET['location'];
-	var_dump($propertyLocation);
-	var_dump($propertyType);
+	//$propertyType = $_GET['property-type']; 
+	//$propertyLocation = $_GET['location'];
+	//var_dump($propertyLocation);
+	//var_dump($propertyType);
 	//$selectPropertiesQuery = ""
 ?>
 <!DOCTYPE html>
@@ -59,21 +64,27 @@
 		<h1>FEATURED PROPERTIES</h1>
 		<article>
 			<div>
-				<?php foreach ($result as $row): ?>
+				<?php foreach ($properties as $property): ?>
 					<?php for ($i = 0; $i < 10; $i++): ?>
 						<?php  
-							$id = rand(1, count($result)); 
-							if ($id === $row['id']): 
+							$id = rand(1, count($properties)); 
+							if ($id === $property['id']): 
 						?>
 								<figure>
-									<img src="" alt="Can't load the image.">
+									
+									<?php foreach ($images as $image): ?>
+										<?php $propertyId = $image['property_id']; ?>
+										<?php if ($id === $propertyId): ?>
+									<img src="<?=htmlspecialchars($image['image_url'])?>" style="height: 100; weight: 200;" alt="Can't load the image.">
 									<figcaption>this is the caption of the image.</figcaption>
+										<?php endif; ?>
+									<?php endforeach; ?>
 								</figure>
-								<h3><?=htmlspecialchars($row['title'])?></h3>
+								<h3><a href="property.php?id=<?=htmlspecialchars($property['id'])?>"><?=htmlspecialchars($property['title'])?></a></h3>
 								<p>
-									<?=htmlspecialchars($row['price'])?>
-									<?=htmlspecialchars($row['square_meters'])?>m<sup>2</sup>
-									<?=htmlspecialchars($row['location'])?>
+									<?=htmlspecialchars($property['price'])?>
+									<?=htmlspecialchars($property['square_meters'])?>m<sup>2</sup>
+									<?=htmlspecialchars($property['location'])?>
 								</p>
 							<?php endif; ?>
 					<?php endfor; ?>
