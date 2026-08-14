@@ -1,11 +1,16 @@
 <?php 
     require "../config.php";
     $id = $_GET['id']; 
-    //echo $id; 
-    $selectAdminPropertiesQuery = "SELECT * FROM properties WHERE owner_id = :id";
-    $selectAdminPropertiesStmt = $pdo->prepare($selectAdminPropertiesQuery);
-    $selectAdminPropertiesStmt->execute([":id" => $id]);
-    $adminProperties = $selectAdminPropertiesStmt->fetchAll(PDO::FETCH_ASSOC);
+    //echo $id; ´
+    if ($id) {
+        $selectAdminPropertiesQuery = "SELECT * FROM properties WHERE owner_id = :id";
+        $selectAdminPropertiesStmt = $pdo->prepare($selectAdminPropertiesQuery);
+        $selectAdminPropertiesStmt->execute([":id" => $id]);
+        $adminProperties = $selectAdminPropertiesStmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        header("Location: login.php");
+    }
+    
     //var_dump($adminProperties);
 ?>
 
@@ -54,7 +59,7 @@
                         <td><?=htmlspecialchars($adminProperty['property_condition'])?></td>
                         <td><?=htmlspecialchars($adminProperty['year_of_construction'])?></td>
                         <td><?=htmlspecialchars($adminProperty['other_details'])?></td>
-                        <td><button type="button">Edit</button></td>
+                        <td><button type="button"><a href="edit_property.php">Edit</a></button></td>
                         <td><button type="button">Delete</button></td>
                     <?php endforeach; ?>
                 </tr>
