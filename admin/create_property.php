@@ -1,9 +1,12 @@
 <?php 
+    ini_set('display_errors', '1');
+    ini_set('display_startup_errors', '1');
+    error_reporting(E_ALL);
     require "../config.php";
-    //var_dump($_GET);
+    //var_dump($_GET)
     if ($_GET) {
         $title = htmlspecialchars($_GET['title']);
-        $ownerId = htmlspecialchars($_POST['owner-id']);
+        //$ownerId = htmlspecialchars($_POST['owner-id']);
         $price = htmlspecialchars($_GET['price']);
         $squareMeters = htmlspecialchars($_GET['sqm']);
         $numberOfRooms = htmlspecialchars($_GET['rooms']);
@@ -12,21 +15,31 @@
         $propertyCondition = htmlspecialchars($_GET['property-condition']);
         $yearOfConstruction = htmlspecialchars($_GET['year']);
         $location = htmlspecialchars($_GET['location']);
+        $ownerId = 11; 
 
-        $insertQuery = "INSERT INTO properties (owner_id, title, price, square_meters, number_of_rooms, number_of_bathrooms, other_details, property_condition, year_of_construction, location) VALUES (:ownerId, :title, :price, :squareMeters, :numberOfRooms, :numberOfBathrooms, :otherDetails, :propertyCondition, :yearOfConstruction, :location)";
-        $insertStmt = $pdo->prepare($insertQuery);
-        $insertStmt->execute(
-            [":title" => $title,
-            ":price" => $price, 
-            ":squareMeters" => $squareMeters,
-            ":numberOfRooms" => $numberOfRooms,
-            ":numberOfBathrooms" => $numberOfBathrooms,
-            ":otherDetails" => $otherDetails,
-            ":propertyCondition" => $propertyCondition,
-            ":yearOfConstruction" => $yearOfConstruction,
-            ":location" => $location]
-        );
-        echo "row added correctly";
+        try {
+            $insertQuery = "INSERT INTO properties (owner_id, title, price, square_meters, number_of_rooms, number_of_bathrooms, other_details, property_condition, year_of_construction, location) VALUES (:ownerId, :title, :price, :squareMeters, :numberOfRooms, :numberOfBathrooms, :otherDetails, :propertyCondition, :yearOfConstruction, :location)";
+            $insertStmt = $pdo->prepare($insertQuery);
+            $insertStmt->execute(
+                [":ownerId" => $ownerId,
+                ":title" => $title,
+                ":price" => $price, 
+                ":squareMeters" => $squareMeters,
+                ":numberOfRooms" => $numberOfRooms,
+                ":numberOfBathrooms" => $numberOfBathrooms,
+                ":otherDetails" => $otherDetails,
+                ":propertyCondition" => $propertyCondition,
+                ":yearOfConstruction" => $yearOfConstruction,
+                ":location" => $location
+                ]
+            );
+            echo "row added correctly";
+        } catch (Throwable $e) {
+            echo $e->getMessage(); 
+            echo $e->getLine();
+        }
+        
+        
     }
 ?>
 
