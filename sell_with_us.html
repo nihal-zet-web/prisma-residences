@@ -17,7 +17,7 @@
 	</nav>
 	<main>
 	<section> 
-		<form method="post" action="">
+		<form method="post" action="contacts.php">
             <h1>SELL WITH US</h1>
             <h2>Ready for your next chapter? We can help.</h2>
             <p>Leave your details below, and our local property experts will create a custom valuation report for your house within 24 hours.</p>
@@ -31,7 +31,8 @@
             <input id="phone-number" value="phone-number" name="phone-number">
             <label for="message">Message</label>
             <textarea id="message" value="message" name="message" placeholder="Write something..."></textarea>
-            <input type="submit" value="Submit">
+            <input type="hidden" name="is-seller" value="yes">
+			<input type="submit" value="Submit">
         </form>
 	</section>
 	<section> 
