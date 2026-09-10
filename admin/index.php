@@ -1,12 +1,17 @@
 <?php 
     require "../config.php";
     $id = $_GET['id']; 
-    echo $id; 
-    $selectAdminPropertiesQuery = "SELECT * FROM properties WHERE owner_id = :id";
-    $selectAdminPropertiesStmt = $pdo->prepare($selectAdminPropertiesQuery);
-    $selectAdminPropertiesStmt->execute([":id" => $id]);
-    $adminProperties = $selectAdminPropertiesStmt->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($adminProperties);
+    //echo $id; ´
+    if ($id) {
+        $selectAdminPropertiesQuery = "SELECT * FROM properties WHERE owner_id = :id";
+        $selectAdminPropertiesStmt = $pdo->prepare($selectAdminPropertiesQuery);
+        $selectAdminPropertiesStmt->execute([":id" => $id]);
+        $adminProperties = $selectAdminPropertiesStmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        header("Location: login.php");
+    }
+    
+    //var_dump($adminProperties);
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +30,8 @@
             <h4>ADMIN</h4>
             <ul>
                 <li><a class="navBar-element" href="">PROPERTIES</a></li>
-                <li><a class="navBar-element" href="contacts.html">CONTACTS</a></li>
-                <li><a class="navBar-element" href="create_property.html">CREATE</a></li>
+                <li><a class="navBar-element" href="contacts.php">CONTACTS</a></li>
+                <li><a class="navBar-element" href="create_property.php">CREATE</a></li>
             </ul>
         </nav>
         <main>
@@ -54,7 +59,7 @@
                         <td><?=htmlspecialchars($adminProperty['property_condition'])?></td>
                         <td><?=htmlspecialchars($adminProperty['year_of_construction'])?></td>
                         <td><?=htmlspecialchars($adminProperty['other_details'])?></td>
-                        <td><button type="button">Edit</button></td>
+                        <td><button type="button"><a href="edit_property.php">Edit</a></button></td>
                         <td><button type="button">Delete</button></td>
                     <?php endforeach; ?>
                 </tr>

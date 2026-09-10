@@ -51,7 +51,7 @@
 		</article>
 	</section>
     <section>
-        <form method="post" action="">
+        <form method="post" action="contacts.php">
             <h1>CONTACT US</h1>
             <h2>Interested in this property?</h2>
             <p>Leave your details below, and our local property experts will contact you within 24h.</p>
@@ -65,7 +65,8 @@
             <input id="phone-number" value="phone-number" name="phone-number">
             <label for="message">Message</label>
             <textarea id="message" value="message" name="message" placeholder="I want to schedule a meeting..."></textarea>
-            <input type="submit" value="Submit">
+            <input type="hidden" name="is-seller" value="no">
+			<input type="submit" value="Submit">
         </form>
     </section>
 	</main>
